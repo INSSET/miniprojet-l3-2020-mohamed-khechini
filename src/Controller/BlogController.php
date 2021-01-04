@@ -15,11 +15,16 @@ class BlogController extends AbstractController
      */
     public function index(): Response
     {
-        $posts = $this->getDoctrine()->getRepository(Post::class)
+        $posts = $this->getDoctrine()
+                        ->getRepository(Post::class)
                         ->findBy([], ['time'=>'DESC']);
-
+        
+        $latests = $this->getDoctrine()
+                        ->getRepository(Post::class)
+                        ->getLatest();
         return $this->render('blog/index.html.twig', [
-            'posts' => $posts
+            'posts' => $posts,
+            'latests' => $latests
         ]);
     }
 }
