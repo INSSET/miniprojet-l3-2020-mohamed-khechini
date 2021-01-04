@@ -2,7 +2,7 @@
         <h4 class="font-italic">Articles Récents</h4>
         <ol class="list-unstyled mb-0">
             {% for post in latests %}
-                <li><a href="#">{{post.title}}</a></li>
+                <li><a href="{{path('blog_show', {'slug': post.slug})}}">{{post.title}}</a></li>
             {% endfor %}
         </ol>
 </div>
