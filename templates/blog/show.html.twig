@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{post.title}}{% endblock %}
+
+{% block body %}
+    <div class="container">
+        {% include "/includes/header.html.twig" %}
+
+        <main class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="Blogheading">
+                        <h3>Post</h3>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="section layout_padding blog_blue_bg light_silver">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="full">
+                                <div class="big_blog">
+                                    <img class="img-responsive" src="../images/post1.jpg" alt="website template image">
+                                </div>
+                                <div class="blog_cont_2">
+                                    <h3>{{post.title}}</h3>
+                                    <p class="sublittle">{{ post.time | date("F jS \\à g:ia")}}</p>
+                                    <p>{{post.body}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mx-4">
+                           {{ include ("/includes/sidebar.html.twig", {'latests': latests})}}
+                        </div>
+                    </div>
+                    
+            </div>
+
+            <div>
+                WALOU auhdaiuhfeilhfaeuih
+            </div>
+        </main>
+    </div>
+{% endblock %}

@@ -27,4 +27,24 @@ class BlogController extends AbstractController
             'latests' => $latests
         ]);
     }
+
+    /**
+     * @Route("/blog/{slug}", name="blog_show")
+     */
+    public function show($slug){
+        $post = $this->getDoctrine()
+                    ->getRepository(Post::class)
+                    ->findOneBy(['slug' => $slug]);
+
+        $latests = $this->getDoctrine()
+                    ->getRepository(Post::class)
+                    ->getLatest();
+
+        return $this->render('blog/show.html.twig',[
+            'post' => $post,
+            'latests' => $latests
+        ]);
+    }
+
+
 }
