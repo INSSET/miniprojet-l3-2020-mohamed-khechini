@@ -16,24 +16,23 @@
                 
             </div>
             <div class="section layout_padding blog_blue_bg light_silver">
-                    <div class="row">
-                        <div class="col-md-8">
-                            <div class="full">
-                                <div class="big_blog">
-                                    <img class="img-responsive" src="../images/post1.jpg" alt="website template image">
-                                </div>
-                                <div class="blog_cont_2">
-                                    <h3>{{post.title}}</h3>
-                                    <p class="sublittle">{{ post.time | date("F jS \\à g:ia")}}</p>
-                                    <p>{{post.body}}</p>
-                                </div>
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="full">
+                            <div class="big_blog">
+                                <img class="img-responsive" src="../images/post1.jpg" alt="website template image">
+                            </div>
+                            <div class="blog_cont_2">
+                                <h3>{{post.title}}</h3>
+                                <p class="sublittle">{{ post.time | date("F jS \\à g:ia")}}</p>
+                                <p>{{post.body}}</p>
                             </div>
                         </div>
-                        <div class="col-md-3 mx-4">
-                           {{ include ("/includes/sidebar.html.twig", {'latests': latests})}}
-                        </div>
                     </div>
-                    
+                    <div class="col-md-3 mx-4">
+                        {{ include ("/includes/sidebar.html.twig", {'latests': latests})}}
+                    </div>
+                </div>
             </div>
 
             <div>
@@ -41,4 +40,5 @@
             </div>
         </main>
     </div>
+    {% include "/includes/footer.html.twig" %}
 {% endblock %}

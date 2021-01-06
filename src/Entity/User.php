@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -36,6 +37,16 @@ class User
      * @ORM\Column(type="string", length=255)
      */
     private $fullname;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Post", mappedBy="post")
+     */
+    private $posts;
+
+    public function __construct()
+    {
+        $this->posts = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -88,5 +99,9 @@ class User
         $this->fullname = $fullname;
 
         return $this;
+    }
+
+    public function getPosts(){
+        return $this->posts;
     }
 }

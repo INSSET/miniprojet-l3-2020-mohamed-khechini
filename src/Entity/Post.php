@@ -37,6 +37,12 @@ class Post
      */
     private $slug;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="user")
+     * @ORM\JoinColumn()
+     */
+    private $user;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -52,7 +58,7 @@ class Post
         $this->title = $title;
 
         return $this;
-    }
+    }  
 
     public function getBody(): ?string
     {
@@ -87,6 +93,16 @@ class Post
     {
         $this->slug = $slug;
 
+        return $this;
+    }
+
+    public function getUser(){
+        return $this->user;
+    }
+
+    public function setUser($user): self
+    {
+        $this->user = $user;
         return $this;
     }
 }
