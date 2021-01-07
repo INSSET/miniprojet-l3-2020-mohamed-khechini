@@ -25,7 +25,7 @@
                     <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
                         <div class="col p-4 d-flex flex-column position-static">
                             <h3 class="mb-0">{{ post.title }}</h3>
-                            <div class="mb-1 text-muted">{{ post.time | date("F jS \\à g:ia")}}, <a href="#" style="color: #55595c;">par khechinimed</a></div>
+                            <div class="mb-1 text-muted">{{ post.time | date("F jS \\à g:ia")}}, par <a href="#" style="color: #55595c;">{{post.user.fullname}}</a></div>
                             <p class="card-text mb-auto">{{ post.body }}</p>
                             <a href="{{path('blog_show', {'slug': post.slug})}}" class="stretched-link">Lire la suite</a>
                         </div>
@@ -33,7 +33,7 @@
                             <img src="/images/post1.jpg" width="280px" height="250" alt="">               
                         </div>
                     </div>
-                    {% endfor %}    
+                    {% endfor %}
                 </div>
                 <div class="col-md-4">
                     <div class="p-4 mb-3 bg-light rounded">
