@@ -25,6 +25,7 @@
                             <div class="blog_cont_2">
                                 <h3>{{post.title}}</h3>
                                 <p class="sublittle">{{ post.time | date("F jS \\à g:ia")}}</p>
+                                <a href="{{path('user_posts', {'username':post.user.username})}}" style="color: #55595c;">{{post.user.fullname}}</a>
                                 <p>{{post.body}}</p>
                             </div>
                         </div>

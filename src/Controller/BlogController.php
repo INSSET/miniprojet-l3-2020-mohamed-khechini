@@ -3,10 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Post;
+use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\Request;
 
 class BlogController extends AbstractController
 {
@@ -45,6 +45,20 @@ class BlogController extends AbstractController
             'latests' => $latests
         ]);
     }
+
+    /**
+     * @Route("/posts/{username}", name="user_posts")
+     */
+     public function renderUserPosts(User $user){
+        $posts = $this->getDoctrine()
+                    ->getRepository(Post::class)
+                    ->findBy(['user' => $user], ['time' => 'DESC']);
+
+        return $this->render('blog/user_posts.html.twig',[
+            'posts' => $posts,
+            'user' => $user
+        ]);
+     }
 
 
 }

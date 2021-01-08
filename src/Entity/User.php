@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 
-use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -39,15 +38,15 @@ class User implements UserInterface, \Serializable
      */
     private $fullname;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Post", mappedBy="post")
-     */
-    private $posts;
-
     public function __construct()
     {
         $this->posts = new ArrayCollection();
     }
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Post", mappedBy="post")
+     */
+    private $posts;
 
     public function getId(): ?int
     {
