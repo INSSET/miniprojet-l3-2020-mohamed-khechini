@@ -39,10 +39,19 @@ class User implements UserInterface, \Serializable
      */
     private $fullname;
 
+
+    /**
+     * @ORM\Column(type="simple_array")
+     */
+    private $roles = [];
+
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Post", mappedBy="post")
      */
     private $posts;
+
+
+    private $plainPassword;
 
     public function __construct()
     {
@@ -74,6 +83,18 @@ class User implements UserInterface, \Serializable
     public function setPassword(string $password): self
     {
         $this->password = $password;
+
+        return $this;
+    }
+
+    public function getPlainPassword(): string
+    {
+        return $this->plainPassword;
+    }
+
+    public function setPlainPassword(string $plainpassword): self
+    {
+        $this->plainPassword = $plainpassword;
 
         return $this;
     }
@@ -114,7 +135,11 @@ class User implements UserInterface, \Serializable
 
     public function getRoles()
     {
-        return array('ROLE_USER');
+        return $this->roles;
+    }
+
+    public function setRoles(array $roles){
+        $this->roles = $roles;
     }
 
     public function eraseCredentials()
