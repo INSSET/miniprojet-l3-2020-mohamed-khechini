@@ -259,7 +259,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .contact_text h3 {
-  color: #333;
+  color: #5e6465;
   font-size: 20px;
   font-weight: 700;
   padding: 0;
@@ -267,31 +267,20 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .contact_text h4 {
-  color: #db2828;
+  color: #6c757d;
   font-size: 15px;
   font-weight: 500;
   margin-top: -5px;
 }
 
 .contact_text p {
-  color: #827f7f;
-  font-size: 16px;
+  color: #212121;
+  font-size: 20px;
   line-height: 21px;
 }
 
-.reply_bt {
-  width: 100px;
-  background: #e71717;
-  color: #fff;
-  height: 25px;
-  float: right;
-  text-align: center;
-  border-radius: 50px;
-  margin: 22px 0;
-}
-
 .margin_top_30 {
-  margin-top: 30px!important;
+  margin-top: 8px!important;
 }
 
 .comment_form {

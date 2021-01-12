@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Entity;
-
+use Doctrine\Common\Collections\ArrayCollection;
 use App\Repository\PostRepository;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -42,6 +42,16 @@ class Post
      * @ORM\JoinColumn()
      */
     private $user;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="post")
+     */
+    private $comments;
+
+    public function __construct()
+    {
+        $this->comments = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -104,5 +114,10 @@ class Post
     {
         $this->user = $user;
         return $this;
+    }
+
+    public function getComments()
+    {
+        return $this->comments;
     }
 }
