@@ -35,9 +35,71 @@
                 </div>
             </div>
 
-            <div>
-                WALOU auhdaiuhfeilhfaeuih
-            </div>
+            <section class="layout_padding">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="heading">
+                            <h4 style="border-bottom: solid #333 2px;">Comments / <span>{{post.getComments.count}}</span></h4>
+                        </div>
+                    </div>
+                </div>
+                {% for comment in post.getComments %}
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="full comment_blog_line">
+                            <div class="row" style="padding: 19px;">
+                                <div class="col-md-10">
+                                <div class="full contact_text">
+                                    <h3>{{comment.user.username}}</h3>
+                                    <h4>Posté le {{comment.created | date("F jS \\à g:ia")}}</h4>
+                                    <p>{{comment.body}}</p>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+                {% if is_granted('ROLE_USER') %}  
+                <div class="row margin_top_30">
+                    <div class="col-md-12 margin_top_30">
+                        <div class="heading">
+                        <h4>Votre commentaire :</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="full comment_form">
+                            <form action="{{path('comment_add')}}" method="post">
+                                <fieldset>
+                                <div class="col-md-12">
+                                    <div class="row">
+                                    <div class="col-md-6">
+                                        <textarea name="_body" id="body" placeholder="Commentaire..."></textarea>
+                                    </div>
+                                    </div>
+                                    <div class="row margin_top_30">
+                                    <div class="col-md-12">
+                                        <div class="center">
+                                            <button type="submit">Commenter</button>
+                                            <input type="hidden" name="_csrf_token" value="{{csrf_token('authenticate')}}">
+                                            <input type="hidden" name="post_id" value="{{post.id}}">
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                                </fieldset>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                {% else %}
+                    <a href="{{path('security_login')}}">Connectez vous pour commenter</a>
+                {% endif %}
+            </section>
         </main>
     </div>
     {% include "/includes/footer.html.twig" %}
