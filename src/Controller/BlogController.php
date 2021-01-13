@@ -7,17 +7,24 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Knp\Component\Pager\PaginatorInterface;
 
 class BlogController extends AbstractController
 {
     /**
      * @Route("/", name="blog")
      */
-    public function index(): Response
+    public function index(Request $request, PaginatorInterface $paginator): Response
     {
-        $posts = $this->getDoctrine()
+        $articles = $this->getDoctrine()
                         ->getRepository(Post::class)
-                        ->findBy([], ['time'=>'DESC']);
+                        ->findBy([],['time' => 'DESC']);
+
+        $posts = $paginator->paginate(
+            $articles, // Requête contenant les données à paginer (ici nos articles)
+            $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
+            4 // Nombre de résultats par page
+        );
         
         $latests = $this->getDoctrine()
                         ->getRepository(Post::class)

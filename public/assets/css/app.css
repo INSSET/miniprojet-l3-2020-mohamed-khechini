@@ -332,6 +332,40 @@ button, input {
   font-size: 21px;
   font-weight: 500;
 }
+.pagination{
+  font-size: 28px;
+  color: #d6bf9d;
+  border: solid 2px black;
+  border-radius: 3px;
+  font-family: 'Playfair Display';
+  padding-left: 18px;
+  padding-bottom: 9px;
+  width: 240px;
+  margin-left: -25px;
+}
+.pagination a{
+  text-decoration: none;
+  color: #000;
+}
+.pagination a:hover{
+  border-bottom: 2px solid black;
+}
+.pagination .page{
+  margin-right: 10px;
+}
+.pagination .previous{
+  margin-right: 10px;
+  margin-left: 10px;
+}
+.pagination .current{
+  margin-right: 10px;
+}
+.pagination .next{
+  margin-right: 10px;
+}
+.pagination .last{
+  margin-right: 10px;
+}
 
 /*
   * Footer
