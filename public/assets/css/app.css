@@ -62,7 +62,41 @@ h1, h2, h3, h4, h5, h6 {
 @media (min-width: 768px) {
   .h-md-250 { height: 250px; }
 }
-  
+
+.ajouter-btn{
+  width: 25%;
+  background: #313335;
+  color: white;
+}
+.ajouter-btn button{
+  background: none;
+  border: none;
+  color: white;
+}
+
+.ajouter-btn i{
+  color: white;
+}
+
+.ajouter-btn:hover{
+  background: #4e5052;
+  transition: all 0.2s;
+}
+.ajouter-btn:focus{
+  background-color: #4e5052;
+  border-color: transparent;
+  box-shadow: none;
+  transition: all 0.2s;
+  color: white;
+}
+.ajouter-btn button:focus{
+  box-shadow: none;
+  text-decoration: none;
+
+}
+.ajouter-btn i:hover{
+  color: white;
+}
 /* Pagination */
 .blog-pagination {
   margin-bottom: 4rem;
@@ -366,7 +400,39 @@ button, input {
 .pagination .last{
   margin-right: 10px;
 }
+/*
+  * Post add page
+  */
 
+.add-form{
+  width: 100%;
+  max-height: 60em;
+  box-sizing: border-box;
+  border: 1px solid rgb(241, 245, 246);
+  border-radius: 0px 0px 4px 4px;
+  background-color: rgb(255, 255, 255);
+  box-shadow: rgba(28, 47, 58, 0.2) -2px 3px 13px 0px;
+  padding: 28px 26px 35px;
+  margin-left: 2px;
+  margin-bottom: 133px;
+  background: whitesmoke;
+}
+
+.add-form .form-group{
+  width: 100%;
+  text-align: center;
+  padding: 7px;
+  margin-left: 10%;
+}
+.add-form input[type=file]{
+  border: gainsboro 2px solid;
+  padding: 10px;
+  width: 80%;
+}
+.add-form label{
+  font-size: 30px;
+  font-family: "Playfair Display";
+}
 /*
   * Footer
   */
