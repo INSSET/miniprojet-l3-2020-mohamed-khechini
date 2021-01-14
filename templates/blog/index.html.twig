@@ -30,7 +30,7 @@
                             <a href="{{path('blog_show', {'slug': post.slug})}}" class="stretched-link">Lire la suite</a>
                         </div>
                         <div class="col-auto d-none d-lg-block">
-                            <img src="/images/post1.jpg" width="280px" height="250" alt="">               
+                            <img src="{{ asset('uploads/' ~ post.picture) }}" width="280px" height="250px" alt="">               
                         </div>
                     </div>
                     {% endfor %}

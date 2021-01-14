@@ -26,10 +26,8 @@
         <a class="p-2 link-secondary" href="#">Actualités</a>
         <a class="p-2 link-secondary" href="#">About US</a>
         <a class="p-2 link-secondary" href="#">CONTACT</a>
-        
-        <form class="form-inline p2" style="display: flex;">
-            <i class="fas fa-search link-secondary p-2" aria-hidden="true"></i>
-            <input class="search form-control mr-sm-2" type="text" placeholder="Recherche" aria-label="Search">
-        </form>
+        {% if is_granted('ROLE_USER') %}
+        <button type="submit" class="form-control ajouter-btn" onclick="window.location.href='{{path('blog_add')}}';"><i class="fas fa-plus"></i> Ajouter un article</button>
+        {% endif %}
     </nav>
 </div>
