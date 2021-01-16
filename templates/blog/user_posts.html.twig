@@ -1,3 +1,35 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{% endblock %}
+{% block title %}Posts{% endblock %}
+
+{% block body %}
+    <div class="container">
+        {% include "/includes/header.html.twig" %}
+        <div class="row">
+                <div class="col-md-12">
+                    <div class="Blogheading">
+                        <h3>Mes Postes</h3>
+                    </div>
+                </div>
+                
+        </div>
+
+        <div class="col-md-8" style="padding-left: 10px">
+            {% for post in posts %}
+            <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative" style="height: 134px;">
+                <div class="col p-4 d-flex flex-column position-static">
+                    <h3 class="mb-0">{{ post.title }}</h3>
+                    <div class="mb-1 text-muted">{{ post.time | date("F jS \\à g:ia")}}</div>
+                    <a href="{{path('blog_show', {'slug': post.slug})}}" class="stretched-link">Lire la suite</a>
+                </div>
+            </div>
+            <div class="post-edit">
+                <a href="#" class="link-warning">Modifier</a>
+                <a href="{{path('blog_delete', {'slug': post.slug})}}" class="link-danger">Supprimer</a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    
+{% endblock %}
+

@@ -2,7 +2,7 @@
     <div class="row flex-nowrap justify-content-between align-items-center">
     <div class="col-4 pt-1">
         {% if is_granted('ROLE_USER') %}
-        <a class="btn btn-sm btn-outline-secondary" href="#">{{app.user.fullname}}</a>
+        <a class="btn btn-sm btn-outline-secondary" href="{{path('user_posts', {'username': app.user.username})}}">{{app.user.fullname}}</a>
         {% endif %}
     </div>
     <div class="col-4 text-center">

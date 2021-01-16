@@ -433,6 +433,15 @@ button, input {
   font-size: 30px;
   font-family: "Playfair Display";
 }
+
+.post-edit{
+  margin-top: -13px;
+  margin-bottom: 40px;
+}
+
+.post-edit a{
+  margin-right: 5px;
+}
 /*
   * Footer
   */
