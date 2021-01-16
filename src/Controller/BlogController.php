@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Form\PostType;
 use App\Entity\Post;
+use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -99,6 +100,25 @@ class BlogController extends AbstractController
             'latests' => $latests
         ]);
     }
+
+    /**
+     * @Route("/posts/{username}", name="user_posts")
+     */
+    public function renderUserPosts($username){
+
+        $user = $this->getDoctrine()
+                    ->getRepository(User::class)
+                    ->findOneBy(['username' => $username]);
+
+        $posts = $this->getDoctrine()
+                    ->getRepository(Post::class)
+                    ->findBy(['user' => $user], ['time' => 'DESC']);
+
+        return $this->render('blog/user_posts.html.twig',[
+            'posts' => $posts,
+            'user' => $user
+        ]);
+     }
     
     /**
      * @Route("/blog/edit/{slug}", name="blog_edit")
@@ -111,11 +131,15 @@ class BlogController extends AbstractController
     }
 
     /**
-     * @Route("/blog/delete/{slug}", name="blog_delete")
+     * @Route("/posts/delete/{slug}", name="blog_delete")
      */
     public function remove($slug)
     {
-    	return new Response('<h1>Article supprimée: ' .$slug. '</h1>');
+        $entityManager = $this->getDoctrine()->getManager();
+        $post = $entityManager->getRepository(Post::class)->findOneBy(['slug' => $slug]);;
+        $entityManager->remove($post);
+        $entityManager->flush();
+    	return $this->redirectToRoute('blog');
     }
 
 
