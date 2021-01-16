@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Comment;
 use App\Form\PostType;
 use App\Entity\Post;
 use App\Entity\User;
@@ -123,10 +124,46 @@ class BlogController extends AbstractController
     /**
      * @Route("/blog/edit/{slug}", name="blog_edit")
      */
-    public function edit($slug)
+    public function edit($slug, Request $request)
     {
+        $post = $this->getDoctrine()->getRepository(Post::class)->findOneBy(['slug'=> $slug]);
+
+        $form = $this->createForm(PostType::class, $post);
+        $form->handleRequest($request);
+
+        $oldPicture = $post->getPicture();
+        
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            if ($post->getPicture() !== null) {
+                $file = $form->get('picture')->getData();
+                $fileName = uniqid(). '.' .$file->guessExtension();
+
+                try {
+                    $file->move(
+                        $this->getParameter('images_directory'),
+                        $fileName
+                    );
+                } catch (FileException $e) {
+                    return new Response($e->getMessage());
+                }
+
+                $post->setPicture($fileName);
+            } else {
+                $post->setPicture($oldPicture);
+            }
+
+            $slugify = new Slugify();
+            $post->setSlug($slugify->slugify($post->getTitle()));
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($post);
+            $em->flush();
+        }
+
     	return $this->render('blog/edit.html.twig', [
-            
+            'post' => $post,
+            'form' => $form->createView()
         ]);
     }
 
@@ -136,7 +173,7 @@ class BlogController extends AbstractController
     public function remove($slug)
     {
         $entityManager = $this->getDoctrine()->getManager();
-        $post = $entityManager->getRepository(Post::class)->findOneBy(['slug' => $slug]);;
+        $post = $entityManager->getRepository(Post::class)->findOneBy(['slug' => $slug]);
         $entityManager->remove($post);
         $entityManager->flush();
     	return $this->redirectToRoute('blog');

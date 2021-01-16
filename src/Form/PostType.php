@@ -18,7 +18,11 @@ class PostType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('picture', FileType::class, ['label' => 'Image'])
+        $builder->add('picture', FileType::class, [
+                    'required'=> false,
+                    'label' => 'Image',
+                    'data_class' => null
+               ])
                 ->add('title', TextType::class, ['label' => 'Titre'])
                 ->add('body', TextareaType::class, ['label' => 'Article'])
                 ->add('valider', SubmitType::class);
