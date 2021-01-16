@@ -24,7 +24,7 @@
                             </div>
                             <div class="blog_cont_2">
                                 <h3>{{post.title}}</h3>
-                                <p class="sublittle">{{ post.time | date("F jS \\à g:ia")}}</p>
+                                <p class="sublittle">{{ post.time | date("\\L\\e Y-m-d \\à H:i")}}</p>
                                 <p>{{post.body}}</p>
                             </div>
                         </div>
@@ -52,7 +52,7 @@
                                 <div class="col-md-10">
                                 <div class="full contact_text">
                                     <h3>{{comment.user.username}}</h3>
-                                    <h4>Posté le {{comment.created | date("F jS \\à g:ia")}}</h4>
+                                    <h4>Posté {{comment.created | date("\\L\\e Y-m-d \\à H:i")}}</h4>
                                     <p>{{comment.body}}</p>
                                 </div>
                                 </div>
