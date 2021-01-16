@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="1">
+                <source>Too short only {{ value }} instead of {{ limit }}</source>
+                <target>Trop court seulement {{ value }} au lieu de {{ limit }} charactères.</target>
+            </trans-unit>
+            <trans-unit id="2">
+                <source>Minimum three characters, at least one letter, one number and one special character.</source>
+                <target>Minimum 3 charactères, une lettre, un chiffre et un character spécial.</target>
+            </trans-unit>
+            <trans-unit id="3">
+                <source>False username or password</source>
+                <target>Mot de passe ou username incorrect</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

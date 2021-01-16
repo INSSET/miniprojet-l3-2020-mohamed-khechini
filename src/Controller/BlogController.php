@@ -37,7 +37,7 @@ class BlogController extends AbstractController
                         ->getLatest();
         return $this->render('blog/index.html.twig', [
             'posts' => $posts,
-            'latests' => $latests
+            'latests' => $latests,
         ]);
     }
 
