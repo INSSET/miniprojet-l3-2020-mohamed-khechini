@@ -1,0 +1,27 @@
+ {% extends 'base.html.twig' %}
+
+{% block title %}Modifier un article{% endblock %}
+
+{% block body %}
+    <div class="container">
+        {% include "/includes/header.html.twig" %}
+        <div class="row">
+            <div class="col-md-12">
+                <div class="Blogheading">
+                    <h3>Modification d'un post</h3>
+                </div>
+            </div>
+        </div>
+        <div class="row add-form">
+        <h4>Modification de l'article :<br> {{ post.title }}</h4>
+            <div class="col-md-4">
+                {% if post.picture is not null %}
+                    <img width="300" src="{{ asset('uploads/' ~ post.picture) }}">
+                {% endif %}
+            </div>
+            <div class="col-md-6">
+                {{form(form)}}
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -44,7 +44,8 @@ class Post
     private $user;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="post")
+     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="post", cascade={"remove"})
+     * @ORM\JoinColumn(name="id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $comments;
 
