@@ -445,6 +445,10 @@ button, input {
 .post-edit a{
   margin-right: 5px;
 }
+.form-check label{
+  font-size: 20px;
+  margin-right: 88%;
+}
 /*
   * Footer
   */

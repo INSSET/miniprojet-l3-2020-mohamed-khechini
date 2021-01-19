@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Post;
 use App\Entity\User;
 use App\Entity\Comment;
+use App\Form\CommentType;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
@@ -37,6 +38,33 @@ class CommentsController extends AbstractController
 
         return $this->redirectToRoute('blog_show', [
             'slug' => $post_slug,
+        ]);
+    }
+
+    /**
+     * @Route("/comment/edit/{id}", name="comment_edit")
+     */
+    public function edit($id, Request $request){
+        $comment = $this->getDoctrine()->getRepository(Comment::class)->findOneBy(['id'=> $id]);
+        
+        $user = $this->getUser();
+
+        $form = $this->createForm(CommentType::class, $comment);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $comment->setUser($user);
+            
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($comment);
+            $entityManager->flush();
+        }
+        
+        return $this->render('blog/comment_edit.html.twig', [
+            'comment'=> $comment,
+            'form' => $form->createView()
         ]);
     }
 

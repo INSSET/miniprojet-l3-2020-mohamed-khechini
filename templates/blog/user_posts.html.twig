@@ -49,6 +49,7 @@
                             </div>
                         </div>
                         <div class="post-edit">
+                            <a href="{{path('comment_edit', {'id': comment.id})}}" class="link-warning">Modifier</a>
                             <a href="{{path('comment_delete', {'id': comment.id})}}" class="link-danger">Supprimer</a>
                         </div>
                     {% endif %}
@@ -80,7 +81,6 @@
                 {% endfor %}
             {% endif %}
             </div>
-            
     </div>
     
 {% endblock %}

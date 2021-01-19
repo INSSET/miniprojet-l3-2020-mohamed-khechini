@@ -1,0 +1,32 @@
+ {% extends 'base.html.twig' %}
+
+{% block title %}Modifier un article{% endblock %}
+
+{% block body %}
+    <div class="container">
+        {% include "/includes/header.html.twig" %}
+        <div class="row">
+            <div class="col-md-12">
+                <div class="Blogheading">
+                    <h3>Modification du commentaire</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+                    <div class="col-md-12">
+                        <div class="full comment_form">
+                            <form action="{{path('comment_edit', {'id': comment.id})}}" method="post">
+                                <fieldset>
+                                <div class="col-md-12">
+                                    <div class="row">
+                                    <h3>Titre de l'article: {{comment.post.title}}</h3>
+                                    <h3>commentaire fait par: {{comment.user.username}}</h3>
+                                    {{form(form)}}
+                                </div>
+                                </fieldset>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+{% endblock %}
