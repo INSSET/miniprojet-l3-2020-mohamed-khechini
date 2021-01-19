@@ -110,10 +110,17 @@ class BlogController extends AbstractController
         $user = $this->getDoctrine()
                     ->getRepository(User::class)
                     ->findOneBy(['username' => $username]);
-
-        $posts = $this->getDoctrine()
+        
+        
+        if( in_array('ROLE_ADMIN', $user->getRoles())){
+            $posts = $this->getDoctrine()
+                    ->getRepository(Post::class)
+                    ->findBy([], ['time' => 'DESC']);
+        }else{
+            $posts = $this->getDoctrine()
                     ->getRepository(Post::class)
                     ->findBy(['user' => $user], ['time' => 'DESC']);
+        }
 
         return $this->render('blog/user_posts.html.twig',[
             'posts' => $posts,

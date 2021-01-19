@@ -1,7 +1,7 @@
 <header class="blog-header py-3">
     <div class="row flex-nowrap justify-content-between align-items-center">
     <div class="col-4 pt-1">
-        {% if is_granted('ROLE_USER') %}
+        {% if is_granted('ROLE_USER') or is_granted('ROLE_ADMIN') %}
         <a class="btn btn-sm btn-outline-secondary" href="{{path('user_posts', {'username': app.user.username})}}">{{app.user.fullname}}</a>
         {% endif %}
     </div>
@@ -9,7 +9,7 @@
         <a class="blog-header-logo text-dark" href="{{path('blog')}}">Khechini Blog.</a>
     </div>
     <div class="col-4 d-flex justify-content-end align-items-center">
-        {% if is_granted('ROLE_USER') %}
+        {% if is_granted('ROLE_USER') or is_granted('ROLE_ADMIN') %}
         <a class="btn btn-sm " href="{{path('security_logout')}}">Déconnexion</a>
         
         {% else %}
@@ -26,7 +26,7 @@
         <a class="p-2 link-secondary" href="#">Actualités</a>
         <a class="p-2 link-secondary" href="#">About US</a>
         <a class="p-2 link-secondary" href="#">CONTACT</a>
-        {% if is_granted('ROLE_USER') %}
+        {% if is_granted('ROLE_USER') or is_granted('ROLE_ADMIN') %}
         <button type="submit" class="form-control ajouter-btn" onclick="window.location.href='{{path('blog_add')}}';"><i class="fas fa-plus"></i> Ajouter un article</button>
         {% endif %}
     </nav>

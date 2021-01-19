@@ -19,14 +19,16 @@
             <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative" style="height: 134px;">
                 <div class="col p-4 d-flex flex-column position-static">
                     <h3 class="mb-0">{{ post.title }}</h3>
-                    <div class="mb-1 text-muted">{{ post.time | date("F jS \\à g:ia")}}</div>
+                    <div class="mb-1 text-muted">{{ post.time | date("F jS \\à g:ia")}} par {{ post.user.username }}</div>
                     <a href="{{path('blog_show', {'slug': post.slug})}}" class="stretched-link">Lire la suite</a>
                 </div>
             </div>
+            {% if is_granted('ROLE_ADMIN')%}
             <div class="post-edit">
                 <a href="{{path('blog_edit', {'slug': post.slug})}}" class="link-warning">Modifier</a>
                 <a href="{{path('blog_delete', {'slug': post.slug})}}" class="link-danger">Supprimer</a>
             </div>
+            {% endif %}
             {% endfor %}
         </div>
     </div>
