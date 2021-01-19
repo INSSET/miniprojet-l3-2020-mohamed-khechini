@@ -69,7 +69,12 @@ class BlogController extends AbstractController
             }
             $post->setUser($user);
             $post->setTime(new \DateTime());
-            $post->setIsPublished(false);
+            $data = $form->getData();
+            if (in_array('ROLE_ADMIN', $user->getRoles()) && $data->getIsPublished() == "true") {
+                $post->setIsPublished(true);
+            } else {
+                $post->setIsPublished(false);
+            }
             //Utilisation d'un generateur de slug pour remplacer les id
             $slugify = new Slugify();
             $post->setSlug($slugify->slugify($post->getTitle()));
