@@ -61,7 +61,7 @@
                     </div>
                 </div>
                 {% endfor %}
-                {% if is_granted('ROLE_USER') %}  
+                {% if is_granted('ROLE_USER') or is_granted('ROLE_ADMIN')%}  
                 <div class="row margin_top_30">
                     <div class="col-md-12 margin_top_30">
                         <div class="heading">

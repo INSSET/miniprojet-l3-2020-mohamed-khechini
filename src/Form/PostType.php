@@ -8,6 +8,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -25,6 +26,7 @@ class PostType extends AbstractType
                ])
                 ->add('title', TextType::class, ['label' => 'Titre'])
                 ->add('body', TextareaType::class, ['label' => 'Article'])
+                ->add('isPublished', CheckboxType::class, ['label' => 'Publié', 'required'=> false])
                 ->add('valider', SubmitType::class);
                 ;
     }

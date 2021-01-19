@@ -24,7 +24,7 @@ class BlogController extends AbstractController
     {
         $articles = $this->getDoctrine()
                         ->getRepository(Post::class)
-                        ->findBy([],['time' => 'DESC']);
+                        ->findBy(['isPublished' => true],[ 'time' => 'DESC']);
 
         $posts = $paginator->paginate(
             $articles, // Requête contenant les données à paginer (ici nos articles)
@@ -34,7 +34,7 @@ class BlogController extends AbstractController
         
         $latests = $this->getDoctrine()
                         ->getRepository(Post::class)
-                        ->getLatest();
+                        ->findBy(['isPublished' => true],[ 'time' => 'DESC']);
         return $this->render('blog/index.html.twig', [
             'posts' => $posts,
             'latests' => $latests,
@@ -69,6 +69,7 @@ class BlogController extends AbstractController
             }
             $post->setUser($user);
             $post->setTime(new \DateTime());
+            $post->setIsPublished(false);
             //Utilisation d'un generateur de slug pour remplacer les id
             $slugify = new Slugify();
             $post->setSlug($slugify->slugify($post->getTitle()));
@@ -94,7 +95,7 @@ class BlogController extends AbstractController
 
         $latests = $this->getDoctrine()
                     ->getRepository(Post::class)
-                    ->getLatest();
+                    ->findBy(['isPublished' => true],[ 'time' => 'DESC']);
 
         return $this->render('blog/show.html.twig',[
             'post' => $post,
@@ -110,6 +111,13 @@ class BlogController extends AbstractController
         $user = $this->getDoctrine()
                     ->getRepository(User::class)
                     ->findOneBy(['username' => $username]);
+        $comments = $this->getDoctrine()
+                ->getRepository(Comment::class)
+                ->findBy([], ['created' => 'DESC']);
+        
+        $users = $this->getDoctrine()
+                ->getRepository(User::class)
+                ->findBy([]);
         
         
         if( in_array('ROLE_ADMIN', $user->getRoles())){
@@ -124,7 +132,9 @@ class BlogController extends AbstractController
 
         return $this->render('blog/user_posts.html.twig',[
             'posts' => $posts,
-            'user' => $user
+            'users' => $users,
+            'user' => $user,
+            'comments' => $comments
         ]);
      }
     
@@ -135,13 +145,11 @@ class BlogController extends AbstractController
     {
         $post = $this->getDoctrine()->getRepository(Post::class)->findOneBy(['slug'=> $slug]);
 
+        $oldPicture = $post->getPicture();
         $form = $this->createForm(PostType::class, $post);
         $form->handleRequest($request);
-
-        $oldPicture = $post->getPicture();
         
         if ($form->isSubmitted() && $form->isValid()) {
-
             if ($post->getPicture() !== null) {
                 $file = $form->get('picture')->getData();
                 $fileName = uniqid(). '.' .$file->guessExtension();
@@ -162,7 +170,7 @@ class BlogController extends AbstractController
 
             $slugify = new Slugify();
             $post->setSlug($slugify->slugify($post->getTitle()));
-
+            
             $em = $this->getDoctrine()->getManager();
             $em->persist($post);
             $em->flush();

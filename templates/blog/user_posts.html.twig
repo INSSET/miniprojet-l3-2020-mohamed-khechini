@@ -6,14 +6,12 @@
     <div class="container">
         {% include "/includes/header.html.twig" %}
         <div class="row">
-                <div class="col-md-12">
-                    <div class="Blogheading">
-                        <h3>Mes Postes</h3>
-                    </div>
+            <div class="col-md-12">
+                <div class="Blogheading">
+                    <h3>Les postes</h3>
                 </div>
-                
+            </div>
         </div>
-
         <div class="col-md-8" style="padding-left: 10px">
             {% for post in posts %}
             <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative" style="height: 134px;">
@@ -30,7 +28,59 @@
             </div>
             {% endif %}
             {% endfor %}
-        </div>
+            </div>
+
+            
+            {% if is_granted('ROLE_ADMIN')%}
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="Blogheading">
+                        <h3>Les commentaires</h3>
+                    </div>
+                </div>
+                {% for post in posts %}
+                {% for comment in comments %}
+                    {% if (post.id == comment.post.id) %}
+                        <div class=" g-0 border overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative" style="height: 134px; width:68%;">
+                            <div class="col p-4 d-flex flex-column position-static">
+                                <h4 class="mb-0">{{ comment.post.title }}</h4>
+                                <div class="mb-1 text-muted">{{ comment.created | date("F jS \\à g:ia")}} par {{ post.user.username }}</div>
+                                <div class="mb-1">{{ comment.body}}</div>
+                            </div>
+                        </div>
+                        <div class="post-edit">
+                            <a href="{{path('comment_delete', {'id': comment.id})}}" class="link-danger">Supprimer</a>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+                {% endfor %}
+            {% endif %}
+            </div>
+
+            {% if is_granted('ROLE_ADMIN')%}
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="Blogheading">
+                        <h3>Les utilisateurs</h3>
+                    </div>
+                </div>
+                {% for user in users %}
+                    <div class=" g-0 border overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative" style="height: ; width:68%;">
+                        <div class="col p-4 d-flex flex-column position-static">
+                            username: <h4 class="mb-0">{{ user.username }}</h4>
+                            full name: <h4 class="mb-1">{{ user.fullname}}</h4>
+                            email: <h4 class="mb-1">{{ user.email}}</h4>
+                            {% if user.roles[0] == "ROLE_ADMIN"%} 
+                                role: <h4 class="mb-1">Admin</h4>
+                            {% else %}
+                                role: <h4 class="mb-1">Internaute</h4>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+            </div>
+            
     </div>
     
 {% endblock %}

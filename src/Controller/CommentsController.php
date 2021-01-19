@@ -39,4 +39,16 @@ class CommentsController extends AbstractController
             'slug' => $post_slug,
         ]);
     }
+
+    /**
+     * @Route("/comments/delete/{id}", name="comment_delete")
+     */
+    public function remove($id)
+    {
+        $entityManager = $this->getDoctrine()->getManager();
+        $comment = $entityManager->getRepository(Comment::class)->findOneBy(['id' => $id]);
+        $entityManager->remove($comment);
+        $entityManager->flush();
+    	return $this->redirectToRoute('blog');
+    }
 }
