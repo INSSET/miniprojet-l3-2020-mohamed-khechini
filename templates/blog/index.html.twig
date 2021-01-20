@@ -26,7 +26,11 @@
                         <div class="col p-4 d-flex flex-column position-static">
                             <h3 class="mb-0">{{ post.title }}</h3>
                             <div class="mb-1 text-muted">{{ post.time | date("\\L\\e Y-m-d \\à H:i")}}, par <a href="#" style="color: #55595c;">{{post.user.fullname}}</a></div>
+                            
+                            {% autoescape false %}
                             <p class="card-text mb-auto">{{ post.body|striptags|slice(0, 120) ~ '...' }}</p>
+                            {% endautoescape %}
+
                             <a href="{{path('blog_show', {'slug': post.slug})}}" class="stretched-link">Lire la suite</a>
                         </div>
                         <div class="col-auto d-none d-lg-block">
