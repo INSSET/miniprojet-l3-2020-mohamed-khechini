@@ -33,7 +33,12 @@ class PostType extends AbstractType
                     'data_class' => null
                ])
                 ->add('title', TextType::class, ['label' => 'Titre'])
-                ->add('body', TextareaType::class, ['label' => 'Article']);
+                ->add('body', CKEditorType::class, [
+                    'config' => [
+                        'uiColor' => '#ffffff',
+                        'autoload' => true,
+                        ]
+                    ]);
                 
         if ($this->security->isGranted('ROLE_ADMIN')) {
             $builder->add('isPublished', CheckboxType::class, ['label' => 'Publié', 'required'=> false]);
